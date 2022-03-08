@@ -7,7 +7,5 @@ app.use('/', router)
 routes(router)
 
 // INICIANDO O SERVIDOR
-const port = 3000
-app.listen(port, () => {
-  console.log('Servidor rodando na porta ' + port)
-})
+
+app.listen(proces.env.PORT || 3000)
