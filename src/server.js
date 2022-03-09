@@ -9,4 +9,4 @@ routes(router)
 
 // INICIANDO O SERVIDOR
 
-app.listen(proces.env.PORT || 3000)
+app.listen(process.env.PORT || 3000)
