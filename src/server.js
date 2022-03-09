@@ -3,6 +3,7 @@ const routes = require('./routes/routes')
 const app = express()
 const router = express.Router()
 
+app.use(cors())
 app.use('/', router)
 routes(router)
 
