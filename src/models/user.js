@@ -9,8 +9,7 @@ User.init(
     username: DataTypes.STRING,
     password: DataTypes.STRING
   },
-  { sequelize: database, modelName: 'user' }
+  { sequelize: database, modelName: 'users' }
 )
 
 module.exports = User
-

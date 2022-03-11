@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize(
   'authenticate_database',
-  'calvin',
-  'calvintex7',
+  'admin',
+  '@m4rk3t1ng',
   {
     host: 'localhost',
     dialect: 'mysql'
