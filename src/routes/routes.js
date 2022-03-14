@@ -12,13 +12,5 @@ module.exports = function (router) {
     res.send(response)
   })
 
-  router.get('/get-user', async (req, res) => {
-    const response = await User.findAll({
-      where:{
-        id: 1
-      },
-      attributes: ['username', 'password']
-    })
-    res.send(response)
-  })
+ 
 }
