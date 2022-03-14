@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize(
   'authenticate_database',
-  'admin',
-  '@m4rk3t1ng',
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
   {
-    host: 'localhost',
-    dialect: 'mysql'
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_TYPE
   }
 )
 
