@@ -4,7 +4,8 @@ module.exports = {
   login: async clientCredentials => {
     const dbCredentials = await User.findOne({
       where: {
-        username: clientCredentials.username
+        username: clientCredentials.username,
+        password: clientCredentials.password
       },
       attributes: ['username', 'password']
     })
