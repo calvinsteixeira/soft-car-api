@@ -1,29 +1,23 @@
-const users = [
-  {
-    username: 'calvin',
-    password: 123
-  },
-  {
-    username: 'kelvin',
-    password: 321
-  }
-]
+const User = require('../models/user')
 
 module.exports = {
-  login: credentials => {
-    const result = users.find(
-      ({ username, password }) =>
-        (username === credentials.username) &
-        (password === credentials.password)
-    )
-    console.log(result)
-    if (result === undefined) {
-      return {
-        hasError: true,
-        statusCode: 404
-      }
-    } else {
+  login: async clientCredentials => {
+    const dbCredentials = await User.findOne({
+      where: {
+        username: clientCredentials.username
+      },
+      attributes: ['username', 'password']
+    })
+
+    if (!dbCredentials) {
+      return 'Usuário ou senha incorreto'
+    } else if (
+      (clientCredentials.username === dbCredentials.username) &
+      (clientCredentials.password === dbCredentials.password)
+    ) {
       return 'Autenticação válida'
     }
   }
 }
+
+
