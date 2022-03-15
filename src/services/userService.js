@@ -2,7 +2,13 @@ const User = require('../models/user')
 
 module.exports = {
   register: async newUser => {
-    try {
+    const userExists = await User.findOne({
+      where: {
+        name: newUser.name
+      }
+    })
+
+    if (!userExists) {
       await User.create(
         {
           name: newUser.name,
@@ -11,9 +17,18 @@ module.exports = {
         },
         { fields: ['name', 'username', 'password'] }
       )
-      return 'Usuário cadastrado com sucesso'
-    } catch (err) {
-      return 'Usuário não cadastrado'
+
+      return {
+        hasError: false,
+        statusCode: 200,
+        message: 'Usuário cadastrado com sucesso'
+      }
+    } else {
+      return {
+        hasError: true,
+        statusCode: 409,
+        message: 'Usuário já possui cadastrado'
+      }
     }
   }
 }
