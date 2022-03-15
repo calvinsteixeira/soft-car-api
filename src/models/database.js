@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USERNAME,
@@ -14,4 +15,7 @@ sequelize
   .then(() => console.log('Conexão com o banco dados: OK'))
   .catch(() => console.log('Conexão com o banco de dados: FALHA'))
 
-module.exports = sequelize
+module.exports = {
+  sequelize,
+  Op
+}
