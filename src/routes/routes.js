@@ -9,7 +9,7 @@ module.exports = function (router) {
   router.post('/auth', async (req, res) => {
     const credentials = req.body
     const response = await authController.login(credentials)
-    res.send(response)
+    res.status(response.statusCode).send(response)
   })
 
   // REGISTER NEW USER ROUTE
