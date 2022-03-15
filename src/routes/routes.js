@@ -1,11 +1,15 @@
 const User = require('../models/user')
 
 module.exports = function (router) {
+  // CONTROLLERS
+  const authController = require('../controller/authController')
+  const userController = require('../controller/userController')
+
   const bodyParser = require('body-parser')
   router.use(bodyParser.json({ extended: true }))
 
   // AUTH ROUTE
-  const authController = require('../controller/authController')
+
   router.post('/auth', async (req, res) => {
     const credentials = req.body
     const response = await authController.login(credentials)
@@ -13,9 +17,10 @@ module.exports = function (router) {
   })
 
   // REGISTER NEW USER ROUTE
-  const userController = require('../controller/userController')
+
   router.post('/register-user', async (req, res) => {
-    const result = await userController.register(req.body)
-    res.send(result)
+    const response = await userController.register(req.body)
+    // res.status(response.statusCode).send(response)
+    res.status(response.statusCode).send(response)
   })
 }
