@@ -1,5 +1,5 @@
 const { Model, Sequelize } = require('sequelize')
-const database = require('./database')
+const database = require('./database').sequelize
 
 class User extends Model {}
 
