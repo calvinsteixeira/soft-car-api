@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Op = require('../models/database').Op
 
 module.exports = {
   register: async newUser => {
@@ -28,6 +29,31 @@ module.exports = {
         hasError: true,
         statusCode: 409,
         message: 'Usuário já possui cadastrado'
+      }
+    }
+  },
+  getUsers: async user => {
+    const users = await User.findAll({
+      where: {
+        name: {
+          [Op.like]: `${user.data}%`
+        }
+      }
+    })
+
+    if (!users) {
+      return {
+        hasError: true,
+        statusCode: 404,
+        message: 'Users not found'
+      }
+    } else {
+      return {
+        hasError: false,
+        statusCode: 200,
+        data: {
+          users
+        }
       }
     }
   }
