@@ -1,5 +1,3 @@
-const User = require('../models/user')
-
 module.exports = function (router) {
   // CONTROLLERS
   const authController = require('../controller/authController')
@@ -29,3 +27,4 @@ module.exports = function (router) {
     res.status(response.statusCode).send(response)
   })
 }
+
