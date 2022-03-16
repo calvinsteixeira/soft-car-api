@@ -12,7 +12,9 @@ async function login(clientCredentials) {
     return {
       hasError: true,
       statusCode: 404,
-      message: 'User not found'
+      data: {
+        message: 'User not found'
+      }
     }
   } else if (
     (clientCredentials.username === dbCredentials.username) &
@@ -21,13 +23,17 @@ async function login(clientCredentials) {
     return {
       hasError: false,
       statusCode: 200,
-      message: 'Login sucessfull'
+      data: {
+        message: 'Login sucessfull'
+      }
     }
   } else {
     return {
       hasError: true,
       statusCode: 401,
-      message: 'Invalid credentials'
+      data: {
+        message: 'Invalid credentials'
+      }
     }
   }
 }

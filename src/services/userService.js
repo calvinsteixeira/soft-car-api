@@ -4,30 +4,35 @@ const Op = require('../models/database').Op
 async function register(newUser) {
   const userExists = await User.findOne({
     where: {
-      name: newUser.name
+      CPF: newUser.CPF
     }
   })
 
   if (!userExists) {
     await User.create(
       {
+        CPF: newUser.CPF,
         name: newUser.name,
         username: newUser.username,
         password: newUser.password
       },
-      { fields: ['name', 'username', 'password'] }
+      { fields: ['CPF', 'name', 'username', 'password'] }
     )
 
     return {
       hasError: false,
       statusCode: 200,
-      message: 'Usuário cadastrado com sucesso'
+      data: {
+        message: 'Usuário cadastrado com sucesso'
+      }
     }
   } else {
     return {
       hasError: true,
       statusCode: 409,
-      message: 'Usuário já possui cadastrado'
+      data: {
+        message: 'Usuário já possui cadastro'
+      }
     }
   }
 }
@@ -45,7 +50,10 @@ async function getUser(user) {
     return {
       hasError: true,
       statusCode: 404,
-      message: 'Users not found'
+      data: {
+        message: 'Users not found'
+      }
+      
     }
   } else {
     return {
