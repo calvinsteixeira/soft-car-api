@@ -30,4 +30,6 @@ User.init(
   { sequelize: database, modelName: 'users', timestamps: false }
 )
 
+User.sync()
+
 module.exports = User
