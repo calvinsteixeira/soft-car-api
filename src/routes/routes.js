@@ -3,9 +3,6 @@ module.exports = function (router) {
   const authController = require('../controller/authController')
   const userController = require('../controller/userController')
 
-  const bodyParser = require('body-parser')
-  router.use(bodyParser.json({ extended: true }))
-
   // AUTH ROUTE
 
   router.post('/auth', async (req, res) => {
@@ -27,4 +24,3 @@ module.exports = function (router) {
     res.status(response.statusCode).send(response)
   })
 }
-
