@@ -5,24 +5,24 @@ class User extends Model {}
 
 User.init(
   {
-    id: {
-      autoIncrement: true,
-      type: Sequelize.INTEGER,
+    CPF: {
+      type: Sequelize.STRING(11),
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      unique: true
     },
     name: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(20),
       allowNull: false,
       len: [2, 20]
     },
     username: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(10),
       allowNull: false,
       len: [4, 8]
     },
     password: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(10),
       allowNull: false,
       len: [4, 8]
     }
