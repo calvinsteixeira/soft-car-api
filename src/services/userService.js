@@ -48,17 +48,17 @@ async function getUser(user) {
 
   if (!users) {
     return {
-      hasError: true,
       statusCode: 404,
       data: {
+        hasError: true,
         message: 'Users not found'
       }
     }
   } else {
     return {
-      hasError: false,
       statusCode: 200,
       data: {
+        hasError: false,
         users
       }
     }
