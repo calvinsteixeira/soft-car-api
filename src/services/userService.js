@@ -8,7 +8,15 @@ async function register(newUser) {
     }
   })
 
-  if (!userExists) {
+  if (userExists) {
+    return {
+      statusCode: 409,
+      data: {
+        hasError: true,
+        message: 'Usuário já possui cadastro'
+      }
+    }
+  } else {
     await User.create(
       {
         CPF: newUser.CPF,
@@ -20,18 +28,10 @@ async function register(newUser) {
     )
 
     return {
-      hasError: false,
       statusCode: 200,
       data: {
+        hasError: false,
         message: 'Usuário cadastrado com sucesso'
-      }
-    }
-  } else {
-    return {
-      hasError: true,
-      statusCode: 409,
-      data: {
-        message: 'Usuário já possui cadastro'
       }
     }
   }
@@ -53,7 +53,6 @@ async function getUser(user) {
       data: {
         message: 'Users not found'
       }
-      
     }
   } else {
     return {
