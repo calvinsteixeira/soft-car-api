@@ -11,7 +11,7 @@ async function login(clientCredentials) {
     (clientCredentials.username === dbCredentials.username) &
     (clientCredentials.password === dbCredentials.password)
 
-  if (dbCredentials & validCredentials) {
+  if (validCredentials) {
     return {
       statusCode: 200,
       data: {
