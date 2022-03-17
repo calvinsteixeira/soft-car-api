@@ -7,32 +7,24 @@ async function login(clientCredentials) {
     },
     attributes: ['username', 'password']
   })
-
-  if (!dbCredentials) {
-    return {
-      hasError: true,
-      statusCode: 404,
-      data: {
-        message: 'User not found'
-      }
-    }
-  } else if (
+  const validCredentials =
     (clientCredentials.username === dbCredentials.username) &
     (clientCredentials.password === dbCredentials.password)
-  ) {
+
+  if (dbCredentials & validCredentials) {
     return {
-      hasError: false,
       statusCode: 200,
       data: {
-        message: 'Login sucessfull'
+        hasError: false,
+        message: 'Login realizado com sucesso'
       }
     }
   } else {
     return {
-      hasError: true,
       statusCode: 401,
       data: {
-        message: 'Invalid credentials'
+        hasError: true,
+        message: 'Credenciais inválidas'
       }
     }
   }
