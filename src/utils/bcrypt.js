@@ -12,6 +12,11 @@ async function encryptPassword(userCPF,password) {
   })
 }
 
+async function comparePassword(clientPassword, dbPassword) {
+  return await bcrypt.compareSync(clientPassword, dbPassword)
+}
+
 module.exports = {
-  encryptPassword
+  encryptPassword,
+  comparePassword
 }
