@@ -1,17 +1,20 @@
 const User = require('../models/user')
 
 async function login(clientCredentials) {
+  const bcrypt = require('../utils/bcrypt')
+
   const dbCredentials = await User.findOne({
     where: {
       username: clientCredentials.username
     },
     attributes: ['username', 'password']
   })
-  const validCredentials =
-    (clientCredentials.username === dbCredentials.username) &
-    (clientCredentials.password === dbCredentials.password)
+  const validCredentials = await bcrypt.comparePassword(
+    clientCredentials.password,
+    dbCredentials.password
+  )
 
-  if (validCredentials) {
+  if (validCredentials === true) {
     return {
       statusCode: 200,
       data: {
