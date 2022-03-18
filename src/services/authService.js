@@ -9,12 +9,12 @@ async function login(clientCredentials) {
     },
     attributes: ['username', 'password']
   })
-  const validCredentials = await bcrypt.comparePassword(
+  const match = await bcrypt.comparePassword(
     clientCredentials.password,
     dbCredentials.password
   )
 
-  if (validCredentials === true) {
+  if (match === true) {
     return {
       statusCode: 200,
       data: {
