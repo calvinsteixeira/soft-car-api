@@ -22,7 +22,7 @@ User.init(
       len: [4, 8]
     },
     password: {
-      type: Sequelize.STRING(10),
+      type: Sequelize.STRING(),
       allowNull: false,
       len: [4, 8]
     }
