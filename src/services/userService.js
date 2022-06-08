@@ -1,74 +1,73 @@
-const User = require('../models/user')
-const Op = require('../models/database').Op
+const User = require("../models/user");
+const Op = require("../models/database").Op;
 
 async function register(newUser) {
   const userExists = await User.findOne({
     where: {
-      CPF: newUser.CPF
-    }
-  })
+      CPF: newUser.CPF,
+    },
+  });
 
   if (userExists) {
     return {
       statusCode: 409,
       data: {
         hasError: true,
-        message: 'Usuário já possui cadastro'
-      }
-    }
+        message: "Usuário já possui cadastro",
+      },
+    };
   } else {
-    const bcrypt = require('../utils/bcrypt')
+    const bcrypt = require("../utils/bcrypt");
     await User.create(
       {
         CPF: newUser.CPF,
         name: newUser.name,
         username: newUser.username,
-        password: newUser.password
+        password: newUser.password,
       },
-      { fields: ['CPF', 'name', 'username', 'password'] }
-    )
+      { fields: ["CPF", "name", "username", "password"] }
+    );
 
-    await bcrypt.encryptPassword(newUser.CPF, newUser.password)
+    await bcrypt.encryptPassword(newUser.CPF, newUser.password);
 
     return {
       statusCode: 200,
       data: {
         hasError: false,
-        message: 'Usuário cadastrado com sucesso'
-      }
-    }
+        message: "Usuário cadastrado com sucesso",
+      },
+    };
   }
 }
 
-async function getUser(user) {
-  const users = await User.findAll({
+async function getUser(username) {
+  const user = await User.findOne({
     where: {
-      name: {
-        [Op.like]: `${user.data}%`
-      }
-    }
-  })
+      username: username,
+    },
+    attributes: ["username", "CPF"],
+  });
 
-  if (!users) {
+  if (!user) {
     return {
       statusCode: 404,
       data: {
         hasError: true,
-        message: 'Users not found'
-      }
-    }
+        message: "Usuário não encontrado",
+      },
+    };
   } else {
     return {
       statusCode: 200,
       data: {
         hasError: false,
-        users
-      }
-    }
+        user,
+      },
+    };
   }
 }
 
 module.exports = {
   register,
-  getUser
-}
+  getUser,
+};

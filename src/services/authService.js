@@ -9,25 +9,36 @@ async function login(clientCredentials) {
     },
     attributes: ['username', 'password']
   })
-  const match = await bcrypt.comparePassword(
-    clientCredentials.password,
-    dbCredentials.password
-  )
 
-  if (match === true) {
+  if (!dbCredentials) {
     return {
-      statusCode: 200,
+      statusCode: 404,
       data: {
-        hasError: false,
-        message: 'Login realizado com sucesso'
+        hasError: true,
+        message: 'Usuário não cadastrado'
       }
     }
   } else {
-    return {
-      statusCode: 401,
-      data: {
-        hasError: true,
-        message: 'Credenciais inválidas'
+    const match = await bcrypt.comparePassword(
+      clientCredentials.password,
+      dbCredentials.password
+    )
+
+    if (match) {
+      return {
+        statusCode: 200,
+        data: {
+          hasError: false,
+          message: 'Login realizado com sucesso'
+        }
+      }
+    } else {
+      return {
+        statusCode: 401,
+        data: {
+          hasError: true,
+          message: 'Usuário ou senha incorretos'
+        }
       }
     }
   }
