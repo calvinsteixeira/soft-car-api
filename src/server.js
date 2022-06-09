@@ -6,13 +6,13 @@ const cors = require("cors");
 const app = express();
 const router = express.Router();
 
-const corsOptions = {
-  origin: "*",
-  optionsSuccessStatus: 200,
-};
-
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "UPDATE"],
+  })
+);
 app.use("/", router);
 routes(router);
 
