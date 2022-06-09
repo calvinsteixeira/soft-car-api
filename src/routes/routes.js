@@ -1,10 +1,13 @@
 module.exports = function (router) {
   // CONTROLLERS
+  const cors = require("cors");
   const authController = require("../controller/authController");
   const userController = require("../controller/userController");
   const productsController = require("../controller/productsController");
 
   // AUTH ROUTE
+
+  router.use(cors());
 
   router.post("/auth", async (req, res) => {
     const response = await authController.login(req.body);
@@ -15,10 +18,7 @@ module.exports = function (router) {
 
   router.post("/register-user", async (req, res) => {
     const response = await userController.register(req.body);
-    res
-      .header("Access-Control-Allow-Origin", "*")
-      .status(response.statusCode)
-      .send(response.data);
+    res.status(response.statusCode).send(response.data);
   });
 
   // GET USERS ROUTE
