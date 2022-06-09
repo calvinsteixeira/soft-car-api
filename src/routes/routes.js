@@ -15,7 +15,10 @@ module.exports = function (router) {
 
   router.post("/register-user", async (req, res) => {
     const response = await userController.register(req.body);
-    res.status(response.statusCode).send(response);
+    res
+      .header("Access-Control-Allow-Origin", "*")
+      .status(response.statusCode)
+      .send(response);
   });
 
   // GET USERS ROUTE
