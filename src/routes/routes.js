@@ -18,7 +18,7 @@ module.exports = function (router) {
     res
       .header("Access-Control-Allow-Origin", "*")
       .status(response.statusCode)
-      .send(response);
+      .send(response.data);
   });
 
   // GET USERS ROUTE
