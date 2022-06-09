@@ -1,6 +1,7 @@
 module.exports = function (router) {
   // CONTROLLERS
   const authController = require("../controller/authController");
+  const userController = require("../controller/userController");
   const productsController = require("../controller/productsController");
 
   // AUTH ROUTE
