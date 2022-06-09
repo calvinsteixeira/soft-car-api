@@ -7,12 +7,11 @@ const app = express();
 const router = express.Router();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "DELETE", "UPDATE"],
-  })
-);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  app.use(cors());
+  next();
+});
 app.use("/", router);
 routes(router);
 
