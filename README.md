@@ -7,5 +7,7 @@ Dependências utilizadas:
 "bcrypt", "cors", "dotenv", "express", "mysql2", "nodemon", "sequelize"
  
  Instalação de dependências -> $ npm install
+ 
  Configuração das variáveis de ambiente -> Utilizar o modelo .env.examples disponível na pasta /src
+ 
  Rodar o projeto -> $ nodemon server.js
