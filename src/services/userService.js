@@ -4,7 +4,7 @@ const Op = require("../models/database").Op;
 async function register(newUser) {
   const userExists = await User.findOne({
     where: {
-      CPF: newUser.CPF,
+      cpf: newUser.cpf,
     },
   });
 
@@ -20,7 +20,7 @@ async function register(newUser) {
     const bcrypt = require("../utils/bcrypt");
     await User.create(
       {
-        CPF: newUser.CPF,
+        cpf: newUser.cpf,
         name: newUser.name,
         username: newUser.username,
         password: newUser.password,
@@ -28,7 +28,7 @@ async function register(newUser) {
       { fields: ["CPF", "name", "username", "password"] }
     );
 
-    await bcrypt.encryptPassword(newUser.CPF, newUser.password);
+    await bcrypt.encryptPassword(newUser.cpf, newUser.password);
 
     return {
       statusCode: 200,
