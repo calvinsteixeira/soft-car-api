@@ -7,7 +7,11 @@ module.exports = function (router) {
 
   // AUTH ROUTE
 
-  router.use(cors());
+  router.use(
+    cors({
+      origin: "*",
+    })
+  );
 
   router.post("/auth", async (req, res) => {
     const response = await authController.login(req.body);
