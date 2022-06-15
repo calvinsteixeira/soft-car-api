@@ -25,7 +25,7 @@ async function register(newUser) {
         username: newUser.username,
         password: newUser.password,
       },
-      { fields: ["CPF", "name", "username", "password"] }
+      { fields: ["cpf", "name", "username", "password"] }
     );
 
     await bcrypt.encryptPassword(newUser.cpf, newUser.password);
