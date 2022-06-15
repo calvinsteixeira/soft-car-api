@@ -18,17 +18,17 @@ async function register(newUser) {
     };
   } else {
     const bcrypt = require("../utils/bcrypt");
+    const passwordEncrypted = await bcrypt.encryptPassword(newUser.password);
+
     await User.create(
       {
         cpf: newUser.cpf,
         name: newUser.name,
         username: newUser.username,
-        password: newUser.password,
+        password: passwordEncrypted,
       },
       { fields: ["cpf", "name", "username", "password"] }
     );
-
-    await bcrypt.encryptPassword(newUser.cpf, newUser.password);
 
     return {
       statusCode: 200,

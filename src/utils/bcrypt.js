@@ -1,18 +1,10 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
-async function encryptPassword(userCpf, password) {
+async function encryptPassword(password) {
   const saultRounds = 15;
-  await bcrypt.hash(password, saultRounds, (err, hash) => {
-    User.update(
-      { password: hash },
-      {
-        where: {
-          cpf: userCpf,
-        },
-      }
-    );
-  });
+  const hash = await bcrypt.hashSync(password, saultRounds);
+  return hash;
 }
 
 async function comparePassword(clientPassword, dbPassword) {
