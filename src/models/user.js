@@ -12,7 +12,7 @@ User.init(
       autoIncrement: true,
       unique: true,
     },
-    CPF: {
+    cpf: {
       type: Sequelize.STRING(11),
       allowNull: false,
       primaryKey: false,
